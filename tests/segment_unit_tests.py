@@ -4,7 +4,12 @@ import unittest
 
 import numpy as np
 
+
 class SegmentTests(unittest.TestCase):
+
+    def setUp(self):
+        from jicbioimage.core.io import AutoWrite
+        AutoWrite.on = False
 
     def test_version_is_string(self):
         import jicbioimage.segment
@@ -13,40 +18,55 @@ class SegmentTests(unittest.TestCase):
     def test_connected_components(self):
         from jicbioimage.segment import connected_components
         from jicbioimage.core.image import SegmentedImage
-        ar = np.array([[ 1, 1, 0, 0, 0],
-                       [ 1, 1, 0, 0, 0],
-                       [ 0, 0, 0, 0, 0],
-                       [ 0, 0, 2, 2, 2],
-                       [ 0, 0, 2, 2, 2]], dtype=np.uint8)
+        ar = np.array([[1, 1, 0, 0, 0],
+                       [1, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0],
+                       [0, 0, 2, 2, 2],
+                       [0, 0, 2, 2, 2]], dtype=np.uint8)
         segmentation = connected_components(ar)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
-        self.assertEqual(segmentation.identifiers, set([1,2,3]))
+        self.assertEqual(segmentation.identifiers, set([1, 2, 3]))
 
     def test_connected_components_background_option(self):
         from jicbioimage.segment import connected_components
         from jicbioimage.core.image import SegmentedImage
-        ar = np.array([[ 1, 1, 0, 0, 0],
-                       [ 1, 1, 0, 0, 0],
-                       [ 0, 0, 0, 0, 0],
-                       [ 0, 0, 2, 2, 2],
-                       [ 0, 0, 2, 2, 2]], dtype=np.uint8)
+        ar = np.array([[1, 1, 0, 0, 0],
+                       [1, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0],
+                       [0, 0, 2, 2, 2],
+                       [0, 0, 2, 2, 2]], dtype=np.uint8)
         segmentation = connected_components(ar, background=1)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
-        self.assertEqual(segmentation.identifiers, set([1,2]))
+        self.assertEqual(segmentation.identifiers, set([1, 2]))
 
     def test_connected_components_connectivity_option(self):
         from jicbioimage.segment import connected_components
         from jicbioimage.core.image import SegmentedImage
-        ar = np.array([[ 1, 1, 0, 0, 0],
-                       [ 1, 1, 0, 0, 0],
-                       [ 0, 0, 1, 1, 1],
-                       [ 0, 0, 1, 1, 1],
-                       [ 0, 0, 1, 1, 1]], dtype=np.uint8)
+        ar = np.array([[1, 1, 0, 0, 0],
+                       [1, 1, 0, 0, 0],
+                       [0, 0, 1, 1, 1],
+                       [0, 0, 1, 1, 1],
+                       [0, 0, 1, 1, 1]], dtype=np.uint8)
 
         segmentation = connected_components(ar, connectivity=1)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
-        self.assertEqual(segmentation.identifiers, set([1,2,3,4]))
+        self.assertEqual(segmentation.identifiers, set([1, 2, 3, 4]))
 
         segmentation = connected_components(ar, connectivity=2)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
-        self.assertEqual(segmentation.identifiers, set([1,2]))
+        self.assertEqual(segmentation.identifiers, set([1, 2]))
+
+    def test_connected_components_acts_like_a_transform(self):
+        from jicbioimage.segment import connected_components
+        from jicbioimage.core.image import Image
+        ar = np.array([[1, 1, 0, 0, 0],
+                       [1, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0],
+                       [0, 0, 2, 2, 2],
+                       [0, 0, 2, 2, 2]], dtype=np.uint8)
+        im = Image.from_array(ar)
+        self.assertEqual(len(im.history), 1)
+        segmentation = connected_components(im)
+        self.assertEqual(len(segmentation.history), 2)
+        self.assertEqual(segmentation.history[-1],
+                         "Applied connected_components transform")
