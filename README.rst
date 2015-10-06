@@ -5,10 +5,16 @@ The ``jicbioimage.segment`` Python package
    :target: https://travis-ci.org/JIC-CSB/jicbioimage.segment
    :alt: Travis CI build status (Linux)
 
+.. image:: https://readthedocs.org/projects/jicbioimagesegment/badge/?version=latest
+   :target: https://readthedocs.org/projects/jicbioimagesegment?badge=latest
+   :alt: Documentation Status
+
 
 The ``jicbioimage.segment`` Python package provides a set of standard
 segmentation methods to the ``jicbioimage`` namespace package.
 
+- Documentation: http://jicbioimagesegment.readthedocs.org
+- GitHub: https://github.com/JIC-CSB/jicbioimage.segment
 - Free software: MIT License
 
 Related packages
