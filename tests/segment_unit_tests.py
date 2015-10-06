@@ -99,7 +99,7 @@ class WatershedWithSeedsTests(unittest.TestCase):
                        [0, 0, 0, 0, 0, 0],
                        [3, 0, 0, 0, 0, 4]], dtype=np.uint8)
 
-        segmentation = watershed_with_seeds(image=ar, seeds=sd)
+        segmentation = watershed_with_seeds(ar, seeds=sd)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
         self.assertEqual(segmentation.identifiers, set([1, 2, 3, 4]))
 
@@ -126,7 +126,32 @@ class WatershedWithSeedsTests(unittest.TestCase):
                        [1, 1, 1, 0, 0, 0],
                        [1, 1, 1, 0, 0, 0]], dtype=bool)
 
-        segmentation = watershed_with_seeds(image=ar, seeds=sd, mask=ma)
+        segmentation = watershed_with_seeds(ar, seeds=sd, mask=ma)
         self.assertEqual(segmentation.identifiers, set([1, 2, 3]))
         mask_size = len(segmentation[np.where(segmentation == 0)])
         self.assertEqual(mask_size, 6)
+
+    def test_watershed_with_seeds_acts_like_a_transform(self):
+        from jicbioimage.segment import watershed_with_seeds
+        from jicbioimage.core.image import Image
+
+        ar = np.array([[0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 9, 0, 0],
+                       [9, 9, 9, 9, 9, 9],
+                       [0, 0, 0, 9, 0, 0],
+                       [0, 0, 0, 9, 0, 0]], dtype=np.uint8)
+        im = Image.from_array(ar)
+        self.assertEqual(len(im.history), 1)
+
+        sd = np.array([[1, 0, 0, 0, 0, 2],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [3, 0, 0, 0, 0, 4]], dtype=np.uint8)
+
+        segmentation = watershed_with_seeds(im, seeds=sd)
+        self.assertEqual(len(segmentation.history), 2)
+        self.assertEqual(segmentation.history[-1],
+                         "Applied watershed_with_seeds transform")

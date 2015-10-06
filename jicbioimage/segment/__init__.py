@@ -45,6 +45,7 @@ def connected_components(image, connectivity=2, background=None):
     return segmentation
 
 
+@transformation
 def watershed_with_seeds(image, seeds, mask=None):
     """Return :class:`jicbioimage.core.image.SegmentedImage`.
     """
