@@ -21,6 +21,12 @@ Related packages
 - Documentation: http://jicbioimagecore.readthedocs.org
 - GitHub: https://github.com/JIC-CSB/jicbioimage.core
 
+``jicbioimage.transform``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Documentation: http://jicbioimagetransform.readthedocs.org
+- GitHub: https://github.com/JIC-CSB/jicbioimage.transform
+
 ``jicbioimage.illustrate``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
