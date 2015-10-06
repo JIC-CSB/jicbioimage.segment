@@ -4,16 +4,17 @@ import unittest
 
 import numpy as np
 
-
-class SegmentTests(unittest.TestCase):
-
-    def setUp(self):
-        from jicbioimage.core.io import AutoWrite
-        AutoWrite.on = False
+class GenericUnitTests(unittest.TestCase):
 
     def test_version_is_string(self):
         import jicbioimage.segment
         self.assertTrue(isinstance(jicbioimage.segment.__version__, str))
+
+class ConnectedComponentsTests(unittest.TestCase):
+
+    def setUp(self):
+        from jicbioimage.core.io import AutoWrite
+        AutoWrite.on = False
 
     def test_connected_components(self):
         from jicbioimage.segment import connected_components
