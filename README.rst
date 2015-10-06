@@ -1,6 +1,11 @@
 The ``jicbioimage.segment`` Python package
 ==========================================
 
+.. image:: https://travis-ci.org/JIC-CSB/jicbioimage.segment.svg?branch=master
+   :target: https://travis-ci.org/JIC-CSB/jicbioimage.segment
+   :alt: Travis CI build status (Linux)
+
+
 The ``jicbioimage.segment`` Python package provides a set of standard
 segmentation methods to the ``jicbioimage`` namespace package.
 
