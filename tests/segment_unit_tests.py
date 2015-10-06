@@ -102,3 +102,31 @@ class WatershedWithSeedsTests(unittest.TestCase):
         segmentation = watershed_with_seeds(image=ar, seeds=sd)
         self.assertTrue(isinstance(segmentation, SegmentedImage))
         self.assertEqual(segmentation.identifiers, set([1, 2, 3, 4]))
+
+    def test_watershed_with_seeds_mask_option(self):
+        from jicbioimage.segment import watershed_with_seeds
+        ar = np.array([[0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 9, 0, 0],
+                       [9, 9, 9, 9, 9, 9],
+                       [0, 0, 0, 9, 0, 0],
+                       [0, 0, 0, 9, 0, 0]], dtype=np.uint8)
+
+        sd = np.array([[1, 0, 0, 0, 0, 2],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [3, 0, 0, 0, 0, 4]], dtype=np.uint8)
+
+        ma = np.array([[1, 1, 1, 1, 1, 1],
+                       [1, 1, 1, 1, 1, 1],
+                       [1, 1, 1, 1, 1, 1],
+                       [1, 1, 1, 1, 1, 1],
+                       [1, 1, 1, 0, 0, 0],
+                       [1, 1, 1, 0, 0, 0]], dtype=bool)
+
+        segmentation = watershed_with_seeds(image=ar, seeds=sd, mask=ma)
+        self.assertEqual(segmentation.identifiers, set([1, 2, 3]))
+        mask_size = len(segmentation[np.where(segmentation == 0)])
+        self.assertEqual(mask_size, 6)
