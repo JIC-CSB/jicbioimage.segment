@@ -46,7 +46,7 @@ def main():
     print("Running {}.{}".format(__file__, __name__))
     os.chdir("/")
     print("Working directory: {}".format(os.getcwd()))
-    install_bftools()
+    #install_bftools()
     install_freeimage()
 
 main()
