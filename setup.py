@@ -51,8 +51,8 @@ setup(name='jicbioimage.segment',
       cmdclass={'test': NoseTestCommand},
       install_requires=[
         'jicbioimage.core',
+        'jicbioimage.transform',
         'numpy',
-        'scipy',
         'scikit-image',
       ]
 )
