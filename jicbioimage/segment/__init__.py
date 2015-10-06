@@ -3,6 +3,7 @@
 
 import numpy as np
 import skimage.measure
+import skimage.morphology
 
 from jicbioimage.core.image import SegmentedImage
 from jicbioimage.core.transform import transformation
@@ -20,6 +21,7 @@ def connected_components(image, connectivity=2, background=None):
     :param connectivity: maximum number of orthagonal hops to consider a
                          pixel/voxel as a neighbor
     :param background: consider all pixels with this value (int) as background
+    :returns: :class:`jicbioimage.core.image.SegmentedImage`
     """
     ar = skimage.measure.label(image, connectivity=connectivity,
                                background=background)
@@ -39,5 +41,13 @@ def connected_components(image, connectivity=2, background=None):
             ar[np.where(ar == 0)] = np.max(ar) + 1
             ar[np.where(ar == -1)] = 0
 
+    segmentation = SegmentedImage.from_array(ar)
+    return segmentation
+
+
+def watershed_with_seeds(image, seeds, mask=None):
+    """Return :class:`jicbioimage.core.image.SegmentedImage`.
+    """
+    ar = skimage.morphology.watershed(-image, seeds, mask=mask)
     segmentation = SegmentedImage.from_array(ar)
     return segmentation

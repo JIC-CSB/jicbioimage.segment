@@ -4,11 +4,13 @@ import unittest
 
 import numpy as np
 
+
 class GenericUnitTests(unittest.TestCase):
 
     def test_version_is_string(self):
         import jicbioimage.segment
         self.assertTrue(isinstance(jicbioimage.segment.__version__, str))
+
 
 class ConnectedComponentsTests(unittest.TestCase):
 
@@ -71,3 +73,32 @@ class ConnectedComponentsTests(unittest.TestCase):
         self.assertEqual(len(segmentation.history), 2)
         self.assertEqual(segmentation.history[-1],
                          "Applied connected_components transform")
+
+
+class WatershedWithSeedsTests(unittest.TestCase):
+
+    def setUp(self):
+        from jicbioimage.core.io import AutoWrite
+        AutoWrite.on = False
+
+    def test_watershed_with_seeds(self):
+        from jicbioimage.segment import watershed_with_seeds
+        from jicbioimage.core.image import SegmentedImage
+
+        ar = np.array([[0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 9, 0, 0],
+                       [9, 9, 9, 9, 9, 9],
+                       [0, 0, 0, 9, 0, 0],
+                       [0, 0, 0, 9, 0, 0]], dtype=np.uint8)
+
+        sd = np.array([[1, 0, 0, 0, 0, 2],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0],
+                       [3, 0, 0, 0, 0, 4]], dtype=np.uint8)
+
+        segmentation = watershed_with_seeds(image=ar, seeds=sd)
+        self.assertTrue(isinstance(segmentation, SegmentedImage))
+        self.assertEqual(segmentation.identifiers, set([1, 2, 3, 4]))
