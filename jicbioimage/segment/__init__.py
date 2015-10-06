@@ -36,7 +36,7 @@ import skimage.morphology
 from jicbioimage.core.image import SegmentedImage
 from jicbioimage.core.transform import transformation
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 
 @transformation
