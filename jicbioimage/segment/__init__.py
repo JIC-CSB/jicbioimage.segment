@@ -38,7 +38,7 @@ from jicbioimage.core.image import Image
 from jicbioimage.core.transform import transformation
 from jicbioimage.core.util.array import false_color
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 class Region(np.ndarray):
     """Class representing a region of interest in an image.
