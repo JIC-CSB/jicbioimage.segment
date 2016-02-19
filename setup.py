@@ -53,6 +53,7 @@ setup(name='jicbioimage.segment',
         'jicbioimage.core',
         'jicbioimage.transform',
         'numpy',
+        'scipy',
         'scikit-image',
       ]
 )

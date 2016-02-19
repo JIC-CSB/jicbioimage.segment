@@ -20,7 +20,7 @@ class ConnectedComponentsTests(unittest.TestCase):
 
     def test_connected_components(self):
         from jicbioimage.segment import connected_components
-        from jicbioimage.core.image import SegmentedImage
+        from jicbioimage.segment import SegmentedImage
         ar = np.array([[1, 1, 0, 0, 0],
                        [1, 1, 0, 0, 0],
                        [0, 0, 0, 0, 0],
@@ -32,7 +32,7 @@ class ConnectedComponentsTests(unittest.TestCase):
 
     def test_connected_components_background_option(self):
         from jicbioimage.segment import connected_components
-        from jicbioimage.core.image import SegmentedImage
+        from jicbioimage.segment import SegmentedImage
         ar = np.array([[1, 1, 0, 0, 0],
                        [1, 1, 0, 0, 0],
                        [0, 0, 0, 0, 0],
@@ -44,7 +44,7 @@ class ConnectedComponentsTests(unittest.TestCase):
 
     def test_connected_components_connectivity_option(self):
         from jicbioimage.segment import connected_components
-        from jicbioimage.core.image import SegmentedImage
+        from jicbioimage.segment import SegmentedImage
         ar = np.array([[1, 1, 0, 0, 0],
                        [1, 1, 0, 0, 0],
                        [0, 0, 1, 1, 1],
@@ -83,7 +83,7 @@ class WatershedWithSeedsTests(unittest.TestCase):
 
     def test_watershed_with_seeds(self):
         from jicbioimage.segment import watershed_with_seeds
-        from jicbioimage.core.image import SegmentedImage
+        from jicbioimage.segment import SegmentedImage
 
         ar = np.array([[0, 0, 0, 0, 0, 0],
                        [0, 0, 0, 0, 0, 0],
