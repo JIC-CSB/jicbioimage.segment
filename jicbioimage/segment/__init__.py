@@ -40,6 +40,7 @@ from jicbioimage.core.util.array import false_color
 
 __version__ = "0.2.0"
 
+
 class Region(np.ndarray):
     """Class representing a region of interest in an image.
 
@@ -144,6 +145,11 @@ class Region(np.ndarray):
         dilated_array = nd.morphology.binary_dilation(self,
                                                       iterations=iterations)
         return Region(dilated_array)
+
+    @property
+    def centroid(self):
+        """Return centroid as (y, x) tuple."""
+        return tuple([np.mean(ia) for ia in self.index_arrays])
 
 
 class SegmentedImage(Image):

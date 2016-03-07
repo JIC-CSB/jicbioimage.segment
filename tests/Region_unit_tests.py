@@ -204,3 +204,31 @@ class RegionTestCase(unittest.TestCase):
                                [0, 0, 0]])
         region = Region(test_array)
         self.assertEqual(str(region), str(region))
+
+
+    def test_centroid(self):
+        from jicbioimage.segment import Region
+
+        test_array = np.array([[0, 1, 1, 1, 0],
+                               [0, 1, 1, 1, 0],
+                               [0, 1, 1, 1, 0],
+                               [0, 0, 0, 0, 0],
+                               [0, 0, 0, 0, 0]])
+
+        region = Region(test_array)
+        c = region.centroid
+        self.assertEqual(c, (1., 2.))
+
+
+    def test_centroid_with_fraction(self):
+        from jicbioimage.segment import Region
+
+        test_array = np.array([[0, 1, 1, 0, 0],
+                               [0, 1, 1, 0, 0],
+                               [0, 0, 0, 0, 0],
+                               [0, 0, 0, 0, 0],
+                               [0, 0, 0, 0, 0]])
+
+        region = Region(test_array)
+        c = region.centroid
+        self.assertEqual(c, (0.5, 1.5))
