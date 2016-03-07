@@ -86,8 +86,7 @@ class RegionTestCase(unittest.TestCase):
 
         border_region = Region(border_array)
 
-        self.assertTrue( np.array_equal(region.border,
-            border_region))
+        self.assertTrue(np.array_equal(region.border, border_region))
 
     def test_region_inner(self):
         from jicbioimage.segment import Region
@@ -108,8 +107,7 @@ class RegionTestCase(unittest.TestCase):
 
         inner_region = Region(inner_array)
 
-        self.assertTrue(np.array_equal(region.inner,
-            inner_region))
+        self.assertTrue(np.array_equal(region.inner, inner_region))
 
     def test_force_binary(self):
         from jicbioimage.segment import Region
@@ -142,7 +140,7 @@ class RegionTestCase(unittest.TestCase):
                                       [0, 0, 0, 0, 0]], dtype=bool)
 
         self.assertTrue(np.array_equal(region.convex_hull,
-            convex_hull_array))
+                                       convex_hull_array))
 
     def test_index_arrays(self):
         from jicbioimage.segment import Region
@@ -152,7 +150,7 @@ class RegionTestCase(unittest.TestCase):
                                [0, 0, 0]])
 
         region = Region(test_array)
-        x_array, y_array =  region.index_arrays
+        x_array, y_array = region.index_arrays
         self.assertTrue(np.array_equal(x_array, np.array([0, 0, 1])))
         self.assertTrue(np.array_equal(y_array, np.array([1, 2, 2])))
 
@@ -164,9 +162,9 @@ class RegionTestCase(unittest.TestCase):
                                [0, 0, 0]])
 
         region = Region(test_array)
-        x_array, y_array =  region.index_arrays
+        x_array, y_array = region.index_arrays
         self.assertEqual(region.points,
-            [(0,1), (0,2), (1,2)])
+                         [(0, 1), (0, 2), (1, 2)])
 
     def test_dilate(self):
         from jicbioimage.segment import Region
@@ -185,9 +183,8 @@ class RegionTestCase(unittest.TestCase):
                                  [1, 1, 1, 0, 0],
                                  [0, 1, 0, 0, 0]], dtype=bool)
 
-
         self.assertTrue(np.array_equal(region.dilate(),
-            dilate_array))
+                                       dilate_array))
 
     def test_repr(self):
         from jicbioimage.segment import Region
@@ -205,7 +202,6 @@ class RegionTestCase(unittest.TestCase):
         region = Region(test_array)
         self.assertEqual(str(region), str(region))
 
-
     def test_centroid(self):
         from jicbioimage.segment import Region
 
@@ -218,7 +214,6 @@ class RegionTestCase(unittest.TestCase):
         region = Region(test_array)
         c = region.centroid
         self.assertEqual(c, (1., 2.))
-
 
     def test_centroid_with_fraction(self):
         from jicbioimage.segment import Region
