@@ -125,6 +125,23 @@ class SegmentedImageTests(unittest.TestCase):
 
         self.assertTrue(np.array_equal(ar, segmented_image.false_color_image))
 
+    def test_remove_region(self):
+
+        from jicbioimage.segment import SegmentedImage
+
+        input_array = np.array([[0, 0, 0],
+                                [1, 1, 1],
+                                [2, 2, 2]])
+
+        expected_output = np.array([[0, 0, 0],
+                                    [1, 1, 1],
+                                    [0, 0, 0]])
+
+        segmented_image = SegmentedImage.from_array(input_array)
+
+        segmented_image.remove_region(2)
+
+        self.assertTrue(np.array_equal(segmented_image, expected_output))
 
 if __name__ == '__main__':
     unittest.main()

@@ -225,6 +225,14 @@ class SegmentedImage(Image):
         """
         return self.false_color_image.png(width)
 
+    def remove_region(self, identifier):
+        """Remove region from the segmentation.
+
+        :param identifier: region identifier
+        """
+        region = self.region_by_identifier(identifier)
+        self[region] = 0
+
 
 @transformation
 def connected_components(image, connectivity=2, background=None):
