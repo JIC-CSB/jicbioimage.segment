@@ -233,6 +233,17 @@ class SegmentedImage(Image):
         region = self.region_by_identifier(identifier)
         self[region] = 0
 
+    def merge_regions(self, id1, id2):
+        """Merge two regions into one.
+
+        The merged region will take on the id1 identifier.
+
+        :param id1: region 1 identifier
+        :param id2: region 2 identifier
+        """
+        region2 = self.region_by_identifier(id2)
+        self[region2] = id1
+
 
 @transformation
 def connected_components(image, connectivity=2, background=None):
