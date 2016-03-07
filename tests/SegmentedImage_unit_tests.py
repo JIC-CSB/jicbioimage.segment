@@ -6,11 +6,8 @@ import io
 import numpy as np
 import PIL
 
-class SegmentedImageTests(unittest.TestCase):
 
-    def test_import_SegmentedImage_class(self):
-        # This throws an error if the class cannot be imported.
-        from jicbioimage.segment import SegmentedImage
+class SegmentedImageTests(unittest.TestCase):
 
     def test_identifiers(self):
 
@@ -55,15 +52,15 @@ class SegmentedImageTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             segmented_image.region_by_identifier(-1)
 
-    
         from jicbioimage.segment import Region
 
         selected_region = segmented_image.region_by_identifier(1)
 
         self.assertTrue(isinstance(selected_region, Region))
 
-        self.assertTrue( np.array_equal(selected_region, 
-            Region.select_from_array(input_array, 1)))
+        expected_output = Region.select_from_array(input_array, 1)
+        self.assertTrue(np.array_equal(selected_region,
+                                       expected_output))
 
     def test_background(self):
 
@@ -79,8 +76,9 @@ class SegmentedImageTests(unittest.TestCase):
 
         background = segmented_image.background
 
-        self.assertTrue( np.array_equal(background,
-            Region.select_from_array(input_array, 0)))
+        expected_output = Region.select_from_array(input_array, 0)
+        self.assertTrue(np.array_equal(background,
+                                       expected_output))
 
     def test_false_colour_image(self):
 
@@ -96,8 +94,8 @@ class SegmentedImageTests(unittest.TestCase):
 
         from jicbioimage.core.util.array import false_color
 
-        self.assertTrue( np.array_equal(false_color_image,
-            false_color(input_array)))
+        self.assertTrue(np.array_equal(false_color_image,
+                                       false_color(input_array)))
 
     def test_grayscale_image(self):
 
@@ -110,7 +108,7 @@ class SegmentedImageTests(unittest.TestCase):
         segmented_image = SegmentedImage.from_array(input_array)
 
         grayscale_image = segmented_image.grayscale_image
-        self.assertTrue( np.array_equal(grayscale_image, input_array))
+        self.assertTrue(np.array_equal(grayscale_image, input_array))
 
     def test_png(self):
 
@@ -125,11 +123,8 @@ class SegmentedImageTests(unittest.TestCase):
         png = segmented_image.png()
         ar = np.asarray(PIL.Image.open(io.BytesIO(png)))
 
-        self.assertTrue( np.array_equal(ar, segmented_image.false_color_image))
+        self.assertTrue(np.array_equal(ar, segmented_image.false_color_image))
 
 
-
-
-       
 if __name__ == '__main__':
     unittest.main()
