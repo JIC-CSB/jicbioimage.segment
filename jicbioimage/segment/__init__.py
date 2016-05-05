@@ -255,6 +255,12 @@ def connected_components(image, connectivity=2, background=None):
     :param background: consider all pixels with this value (int) as background
     :returns: :class:`jicbioimage.core.image.SegmentedImage`
     """
+    # Work around skimage.measure.label behaviour in version 0.12 and higher
+    # treats all 0 pixels as background even if "background" argument is set
+    # to None.
+    if background is None:
+        image[np.where(image == 0)] = np.max(image) + 1
+
     ar = skimage.measure.label(image, connectivity=connectivity,
                                background=background)
 
