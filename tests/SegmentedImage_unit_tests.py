@@ -97,19 +97,6 @@ class SegmentedImageTests(unittest.TestCase):
         self.assertTrue(np.array_equal(pretty_color_image,
                                        pretty_color_array(input_array)))
 
-    def test_grayscale_image(self):
-
-        from jicbioimage.segment import SegmentedImage
-
-        input_array = np.array([[0, 0, 0],
-                                [1, 1, 1],
-                                [2, 2, 2]])
-
-        segmented_image = SegmentedImage.from_array(input_array)
-
-        grayscale_image = segmented_image.grayscale_image
-        self.assertTrue(np.array_equal(grayscale_image, input_array))
-
     def test_png(self):
 
         from jicbioimage.segment import SegmentedImage

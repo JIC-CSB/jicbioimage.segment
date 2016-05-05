@@ -209,14 +209,6 @@ class SegmentedImage(Image):
         """
         return Image.from_array(pretty_color_array(self))
 
-    @property
-    def grayscale_image(self):
-        """Return segmentation using raw identifiers.
-
-        :returns: `jicbioimage.core.image.Image`
-        """
-        return Image.from_array(self)
-
     def png(self, width=None):
         """Return png string of image.
 
