@@ -44,23 +44,23 @@ Related packages
 ``jicbioimage``
 ^^^^^^^^^^^^^^^
 
-- Documentation: http://jicbioimage.readthedocs.org
+- Documentation: http://jicbioimage.readthedocs.io
 - GitHub: https://github.com/JIC-CSB/jicbioimage
 
 ``jicbioimage.core``
 ^^^^^^^^^^^^^^^^^^^^
 
-- Documentation: http://jicbioimagecore.readthedocs.org
+- Documentation: http://jicbioimagecore.readthedocs.io
 - GitHub: https://github.com/JIC-CSB/jicbioimage.core
 
 ``jicbioimage.transform``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Documentation: http://jicbioimagetransform.readthedocs.org
+- Documentation: http://jicbioimagetransform.readthedocs.io
 - GitHub: https://github.com/JIC-CSB/jicbioimage.transform
 
 ``jicbioimage.illustrate``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Documentation: http://jicbioimageillustrate.readthedocs.org
+- Documentation: http://jicbioimageillustrate.readthedocs.io
 - GitHub: https://github.com/JIC-CSB/jicbioimage.illustrate
