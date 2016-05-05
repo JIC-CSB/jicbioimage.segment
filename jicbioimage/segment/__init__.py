@@ -36,7 +36,7 @@ import skimage.morphology
 
 from jicbioimage.core.image import Image
 from jicbioimage.core.transform import transformation
-from jicbioimage.core.util.array import pretty_color_array
+from jicbioimage.core.util.array import pretty_color_array, unique_color_array
 
 __version__ = "0.3.0"
 
@@ -208,6 +208,14 @@ class SegmentedImage(Image):
         :returns: `jicbioimage.core.image.Image`
         """
         return Image.from_array(pretty_color_array(self))
+
+    @property
+    def unique_color_image(self):
+        """Return segmentation as a unique color image.
+
+        :returns: `jicbioimage.core.image.Image`
+        """
+        return Image.from_array(unique_color_array(self))
 
     def png(self, width=None):
         """Return png string of image.

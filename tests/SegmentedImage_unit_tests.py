@@ -97,6 +97,21 @@ class SegmentedImageTests(unittest.TestCase):
         self.assertTrue(np.array_equal(pretty_color_image,
                                        pretty_color_array(input_array)))
 
+
+    def test_unique_colour_image(self):
+
+        from jicbioimage.segment import SegmentedImage
+        input_array = np.array([[0, 0, 0],
+                                [1, 1, 1],
+                                [2, 2, 2]])
+        segmented_image = SegmentedImage.from_array(input_array)
+        unique_color_image = segmented_image.unique_color_image
+
+        from jicbioimage.core.util.array import unique_color_array
+
+        self.assertTrue(np.array_equal(unique_color_image,
+                                       unique_color_array(input_array)))
+
     def test_png(self):
 
         from jicbioimage.segment import SegmentedImage
