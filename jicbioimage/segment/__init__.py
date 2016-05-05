@@ -202,8 +202,8 @@ class SegmentedImage(Image):
         return Region.select_from_array(self, 0)
 
     @property
-    def false_color_image(self):
-        """Return segmentation as a false color image.
+    def pretty_color_image(self):
+        """Return segmentation as a pretty color image.
 
         :returns: `jicbioimage.core.image.Image`
         """
@@ -223,7 +223,7 @@ class SegmentedImage(Image):
         :param width: integer specifying the desired width
         :returns: png as a string
         """
-        return self.false_color_image.png(width)
+        return self.pretty_color_image.png(width)
 
     def remove_region(self, identifier):
         """Remove region from the segmentation.

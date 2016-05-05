@@ -80,7 +80,7 @@ class SegmentedImageTests(unittest.TestCase):
         self.assertTrue(np.array_equal(background,
                                        expected_output))
 
-    def test_false_colour_image(self):
+    def test_pretty_colour_image(self):
 
         from jicbioimage.segment import SegmentedImage
 
@@ -90,11 +90,11 @@ class SegmentedImageTests(unittest.TestCase):
 
         segmented_image = SegmentedImage.from_array(input_array)
 
-        false_color_image = segmented_image.false_color_image
+        pretty_color_image = segmented_image.pretty_color_image
 
         from jicbioimage.core.util.array import pretty_color_array
 
-        self.assertTrue(np.array_equal(false_color_image,
+        self.assertTrue(np.array_equal(pretty_color_image,
                                        pretty_color_array(input_array)))
 
     def test_grayscale_image(self):
@@ -123,7 +123,7 @@ class SegmentedImageTests(unittest.TestCase):
         png = segmented_image.png()
         ar = np.asarray(PIL.Image.open(io.BytesIO(png)))
 
-        self.assertTrue(np.array_equal(ar, segmented_image.false_color_image))
+        self.assertTrue(np.array_equal(ar, segmented_image.pretty_color_image))
 
     def test_remove_region(self):
 
