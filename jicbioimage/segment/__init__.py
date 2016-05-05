@@ -36,7 +36,7 @@ import skimage.morphology
 
 from jicbioimage.core.image import Image
 from jicbioimage.core.transform import transformation
-from jicbioimage.core.util.array import false_color
+from jicbioimage.core.util.array import pretty_color_array
 
 __version__ = "0.3.0"
 
@@ -207,7 +207,7 @@ class SegmentedImage(Image):
 
         :returns: `jicbioimage.core.image.Image`
         """
-        return Image.from_array(false_color(self))
+        return Image.from_array(pretty_color_array(self))
 
     @property
     def grayscale_image(self):

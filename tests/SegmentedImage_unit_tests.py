@@ -92,10 +92,10 @@ class SegmentedImageTests(unittest.TestCase):
 
         false_color_image = segmented_image.false_color_image
 
-        from jicbioimage.core.util.array import false_color
+        from jicbioimage.core.util.array import pretty_color_array
 
         self.assertTrue(np.array_equal(false_color_image,
-                                       false_color(input_array)))
+                                       pretty_color_array(input_array)))
 
     def test_grayscale_image(self):
 
